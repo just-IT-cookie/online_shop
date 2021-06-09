@@ -1,14 +1,27 @@
 <template>
   <div class="shop_item">
-    <img class="item__image" :src="'/api/' + image" alt="" />
-    <span class="item__category">{{ category }}</span>
+    <img class="item__image" :src="'/api/' + itemData.image" alt="" />
+    <span class="item__category">{{ itemData.category }}</span>
     <p class="item__name">
-      {{ name }}
+      {{ itemData.name }}
     </p>
     <div class="item__buy_block">
       <div class="item__price_block">
-        <span class="item__old_price">{{ old_price }}₽</span>
-        <span class="item__price">{{ price }}₽</span>
+        <div class="item__old_price_block">
+          <span class="item__old_price"
+            >{{
+              itemData.old_price.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ")
+            }}₽</span
+          >
+          <span class="difference">
+            -{{ rounding(itemData.old_price, itemData.price) }}%
+          </span>
+        </div>
+        <span class="item__price"
+          >{{
+            itemData.price.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ")
+          }}₽</span
+        >
       </div>
       <button class="item__buyBtn"><i class="fal fa-shopping-cart"></i></button>
     </div>
@@ -19,11 +32,12 @@
 export default {
   name: "Item",
   props: {
-    image: String,
-    category: String,
-    name: String,
-    price: String,
-    old_price: String,
+    itemData: Object,
+  },
+  methods: {
+    rounding(old_price, price) {
+      return (100 - 100 / (Number(old_price) / Number(price))).toFixed(0);
+    },
   },
 };
 </script>
@@ -40,6 +54,7 @@ export default {
   padding: 20px 0 10px 0;
 }
 .shop_item > .item__image {
+  max-width: 80%;
   height: 110px;
   object-fit: contain;
 }
@@ -78,6 +93,13 @@ export default {
   background-color: #050505;
   border: none;
   box-shadow: 0 0 5px 2px #05050520;
+}
+.difference {
+  font-size: 12px;
+  background: #fbaf00;
+  border-radius: 10px;
+  padding: 2px 2px 2px 1px;
+  margin-left: 2px;
 }
 .item__price_block {
   align-self: flex-start;

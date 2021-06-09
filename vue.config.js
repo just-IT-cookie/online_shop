@@ -1,5 +1,5 @@
 module.exports = {
-  // publicPath: "/Online_Shop/",
+  publicPath: "/Online_Shop/",
   devServer: {
     proxy: {
       "^/api": {
@@ -8,5 +8,14 @@ module.exports = {
       },
     },
   },
-  //Remember information about pwa
+  pwa: {
+    themeColor: "#ff4000",
+    iconPaths: {
+      favicon32: "/favicon.svg",
+      favicon16: "/favicon.svg",
+      appleTouchIcon: "/favicon.svg",
+      maskIcon: "/favicon.svg",
+      msTileImage: "/favicon.svg",
+    },
+  },
 };
