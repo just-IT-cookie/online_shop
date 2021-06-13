@@ -7,7 +7,7 @@
     </p>
     <div class="item__buy_block">
       <div class="item__price_block">
-        <div class="item__old_price_block">
+        <div v-if="itemData.old_price" class="item__old_price_block">
           <span class="item__old_price"
             >{{
               itemData.old_price.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ")
@@ -45,6 +45,7 @@ export default {
 <style scoped>
 .shop_item {
   display: flex;
+  height: 245px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -80,7 +81,8 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 10px 15px;
+  align-items: center;
+  padding: 10px 15px 10px 15px;
 }
 .item__buyBtn {
   font-size: 16px;
@@ -103,10 +105,12 @@ export default {
 }
 .item__price_block {
   align-self: flex-start;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5px 0 0 15px;
+  align-items: center;
+  padding: 0 0 0 15px;
 }
 .item__old_price {
   color: #05050550;

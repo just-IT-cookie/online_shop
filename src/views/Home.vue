@@ -1,5 +1,6 @@
 <template>
   <div class="homePage">
+    <Preloader></Preloader>
     <div class="swiperModule">
       <swiper
         id="banners_swiper"
@@ -185,50 +186,37 @@
                 transform="translate(-452.38 -517.56)"
               />
               <path
-                d="M1284.54,590.32l-35.85,35.85a6.92,6.92,0,0,0-2,4.91V650a7,7,0,0,0,6.95,6.94h74.94a6.94,6.94,0,0,0,5.65-11L1295.1,591.2A6.94,6.94,0,0,0,1284.54,590.32Z"
-                transform="translate(-452.38 -517.56)"
-              />
-              <path
                 class="cls-2"
                 d="M1283.89,598l-28.39,28.4a5.5,5.5,0,0,0-1.61,3.89v14.95a5.5,5.5,0,0,0,5.5,5.5h59.35a5.5,5.5,0,0,0,4.48-8.7l-31-43.34A5.5,5.5,0,0,0,1283.89,598Z"
                 transform="translate(-452.38 -517.56)"
               />
             </svg>
           </div>
-          <button class="info_block__store_map_btn">Карта магазинов</button>
-          <div class="info_block__contacts">
-            <p class="contacts__txt">Контакты</p>
-            <div class="contacts__phone_block">
-              <a class="contacts__phone" href="tel:+7(800)000-00-00">
-                +7(800)000-00-00
-              </a>
-            </div>
-            <div class="contacts__mail_block">
-              <a class="contacts__mail" href="mailto:hardik_info@yandex.ru">
-                hardik_info@yandex.ru
-              </a>
-            </div>
-            <div class="contacts__soc_network">
-              <a class="soc_network__btn" href="https://youtube.com/">
-                <i class="fab fa-youtube"></i>
-              </a>
-              <a class="soc_network__btn" href="https://vk.com/">
-                <i class="fab fa-vk"></i>
-              </a>
-              <a class="soc_network__btn" href="https://ok.ru/">
-                <i class="fab fa-odnoklassniki"></i>
-              </a>
-              <a class="soc_network__btn" href="https://telegram.org/">
-                <i class="fab fa-telegram"></i>
-              </a>
-              <a class="soc_network__btn" href="https://instagram.com/">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a class="soc_network__btn" href="https://facebook.com/">
-                <i class="fab fa-facebook"></i>
-              </a>
-            </div>
+
+          <div class="footer__links">
+            <h3 class="useful_links_txt">Полезные ссылки</h3>
+            <ul class="useful_links">
+              <li><i class="fad fa-newspaper"></i>Новости</li>
+              <li><i class="fad fa-phone"></i>Контакты</li>
+              <li><i class="fad fa-map-signs"></i>Магазины на карте</li>
+              <li><i class="fad fa-tools"></i>Сервисные центры</li>
+              <li><i class="fad fa-address-card"></i>О нас</li>
+              <li><i class="fad fa-podium"></i>Форум</li>
+            </ul>
           </div>
+        </div>
+
+        <div class="copyright">
+          <i class="far fa-copyright"></i>
+          2021 Hardik<br />
+          Made, designed and built by
+          <a href="https://vk.com/0xffa500" class="author_link">Nikita Ionov</a
+          ><br />
+          The site contains
+          <a href="https://swiperjs.com/" class="swiper_link">Swiper</a>,
+          <a href="https://fontawesome.com/" class="font_link">Font Awesome</a
+          ><br />
+          All photos and news text are an example and taken from the Internet
         </div>
       </footer>
     </div>
@@ -238,6 +226,7 @@
 <script>
 import axios from "axios";
 import Item from "@/components/Item";
+import Preloader from "@/components/Preloader";
 
 import SwiperCore, { Pagination, A11y, Autoplay } from "swiper";
 
@@ -279,12 +268,14 @@ export default {
     Swiper,
     SwiperSlide,
     Item,
+    Preloader,
   },
 };
 </script>
 <style>
 .homePage {
   margin-top: 61px;
+  margin-bottom: 54px;
 }
 .swiperModule {
   padding-top: 10px;
@@ -359,10 +350,10 @@ export default {
   border-radius: 10px;
 }
 footer {
-  background: #f5f5f6;
+  background: #d5d5d5;
   border-radius: 10px 10px 0 0;
   margin-top: 10px;
-  padding: 20px 0 0 0;
+  padding: 20px 0 20px 0;
 }
 .footer__subscribe_block {
   display: flex;
@@ -373,7 +364,9 @@ footer {
   margin: 20px 0;
   text-align: center;
   font-size: 1.2em;
+  font-weight: 500;
   margin-bottom: 0;
+  padding: 0 10px;
 }
 .subscribe_block__subscribe_input {
   border-radius: 10px;
@@ -400,7 +393,6 @@ footer {
   flex-direction: column;
   margin-top: 20px;
   padding: 10px;
-  background: #333;
 }
 .info_block__footer_logo {
   display: flex;
@@ -412,60 +404,53 @@ footer {
   margin: 10px;
 }
 .footer_logo__svg {
-  fill: #f5f5f5;
+  fill: #050505bb;
 }
 .footer_logo__svg .cls-2 {
-  fill: #333;
+  fill: #d5d5d5;
 }
-.info_block__store_map_btn {
-  border-radius: 10px;
-  border: none;
-  font-size: 1.1em;
-  padding: 13px;
-  background: #444;
-  color: #fff;
-  margin: 20px 10px;
-  box-shadow: 0 0 10px 5px #05050520;
-}
-.info_block__contacts {
-  color: #f5f5f5;
-}
-.contacts__txt {
-  margin-top: 10px;
-  font-size: 1.8em;
-  margin-bottom: 15px;
-  font-weight: 500;
-}
-.contacts__phone,
-.contacts__mail {
-  margin-top: 0;
-  font-size: 1.4em;
-  margin-left: 10px;
-  color: #f5f5f5;
-}
-.contacts__phone_block {
-  margin: 10px 0;
-}
-.contacts__mail_block {
-  margin: 10px 0;
-}
-.contacts__soc_network {
-  margin: 25px 0 20px 0;
+.footer__links {
   display: flex;
-  justify-content: space-around;
-}
-.soc_network__btn {
-  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  border-radius: 10px;
+  color: #050505bb;
+}
+.useful_links_txt {
   font-size: 1.4em;
-  width: 50px;
-  height: 50px;
+  margin: 10px 5px 15px 5px;
+}
+.useful_links {
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+  padding: 0;
+}
+.useful_links > li {
+  padding: 15px;
+  list-style: none;
+  font-size: 1.2em;
+}
+.useful_links > li:first-child {
+  border-top: 1px solid #05050510;
+}
+.useful_links > li:nth-child(even) {
+  border-top: 1px solid #05050510;
+  border-bottom: 1px solid #05050510;
+}
+.useful_links > li > i {
+  min-width: 30px;
+  margin-right: 5px;
+  font-size: 1.1em;
+}
+.copyright {
+  background: #d5d5d5;
+  color: #a5a5a5;
   text-align: center;
-  color: #f5f5f5;
-  background: linear-gradient(#444, #555, #444);
-  box-shadow: 0 0 10px 5px #05050520;
+  margin-top: 10px;
+}
+.author_link,
+.swiper_link,
+.font_link {
+  color: #858585;
 }
 </style>
