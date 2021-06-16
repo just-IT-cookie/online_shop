@@ -1,6 +1,6 @@
 <template>
   <div class="homePage">
-    <Preloader></Preloader>
+    <!-- <Preloader></Preloader> -->
     <div class="swiperModule">
       <swiper
         id="banners_swiper"
@@ -210,13 +210,13 @@
           <i class="far fa-copyright"></i>
           2021 Hardik<br />
           Made, designed and built by
-          <a href="https://vk.com/0xffa500" class="author_link">Nikita Ionov</a
-          ><br />
+          <a href="https://vk.com/0xffa500" class="author_link">Nikita Ionov</a>
+          <br />
           The site contains
           <a href="https://swiperjs.com/" class="swiper_link">Swiper</a>,
-          <a href="https://fontawesome.com/" class="font_link">Font Awesome</a
-          ><br />
-          All photos and news text are an example and taken from the Internet
+          <a href="https://fontawesome.com/" class="font_link">Font Awesome</a>
+          <br />
+          All photos and text are an example and taken from the Internet
         </div>
       </footer>
     </div>
@@ -226,7 +226,7 @@
 <script>
 import axios from "axios";
 import Item from "@/components/Item";
-import Preloader from "@/components/Preloader";
+// import Preloader from "@/components/Preloader";
 
 import SwiperCore, { Pagination, A11y, Autoplay } from "swiper";
 
@@ -268,7 +268,7 @@ export default {
     Swiper,
     SwiperSlide,
     Item,
-    Preloader,
+    // Preloader,
   },
 };
 </script>
@@ -353,12 +353,15 @@ footer {
   background: #d5d5d5;
   border-radius: 10px 10px 0 0;
   margin-top: 10px;
-  padding: 20px 0 20px 0;
+  padding: 0 0 20px 0;
 }
 .footer__subscribe_block {
   display: flex;
   flex-direction: column;
   align-content: center;
+  background: #f5f5f5;
+  padding: 20px 0;
+  border-radius: 10px 10px 0 0;
 }
 .subscribe_block__subscribe_text {
   margin: 20px 0;
@@ -397,6 +400,7 @@ footer {
 .info_block__footer_logo {
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 }
 .footer_logo__svg {
   align-self: flex-start;
@@ -417,7 +421,7 @@ footer {
 }
 .useful_links_txt {
   font-size: 1.4em;
-  margin: 10px 5px 15px 5px;
+  margin: 10px 5px 25px 5px;
 }
 .useful_links {
   display: flex;
@@ -437,6 +441,9 @@ footer {
   border-top: 1px solid #05050510;
   border-bottom: 1px solid #05050510;
 }
+.useful_links > li:last-child {
+  margin-bottom: 5px;
+}
 .useful_links > li > i {
   min-width: 30px;
   margin-right: 5px;
@@ -447,7 +454,10 @@ footer {
   color: #a5a5a5;
   text-align: center;
   margin-top: 10px;
+  padding: 0 10px;
+  line-height: 1.4em;
 }
+
 .author_link,
 .swiper_link,
 .font_link {
