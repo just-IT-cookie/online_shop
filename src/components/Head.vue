@@ -1,293 +1,209 @@
 <template>
-  <div class="header">
-    <!--<div class="menu-btn">
-      <span class="menu-btn__line"></span>
+  <header>
+    <div class="logo_and_nav">
+      <div @click="$emit('changeClass')" class="menu_btn">
+        <span class="line"></span>
+      </div>
+      <router-link :to="{ path: '/' }">
+        <svg
+          class="main_logo_svg"
+          id="Слой_1"
+          data-name="Слой 1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 226.51 226.51"
+        >
+          <defs>
+            <linearGradient
+              id="Безымянный_градиент_4"
+              x1="135.41"
+              y1="99"
+              x2="184.89"
+              y2="99"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0" stop-color="#cce0f4" />
+              <stop offset="0" stop-color="#c3dcf2" />
+              <stop offset="0" stop-color="#c2dcf2" />
+              <stop offset="0" stop-color="#c7def3" />
+              <stop offset="0" stop-color="#bcdaf1" />
+              <stop offset="0" stop-color="#a0cfec" />
+              <stop offset="0" stop-color="#71bde5" />
+              <stop offset="0" stop-color="#32a4da" />
+              <stop offset="0" stop-color="#1e9cd7" />
+              <stop offset="0" stop-color="#4d4d4d" />
+              <stop offset="0.22" stop-color="#323232" />
+              <stop offset="1" />
+            </linearGradient>
+            <linearGradient
+              id="Безымянный_градиент_49"
+              x1="32.44"
+              y1="92.54"
+              x2="97.71"
+              y2="111.88"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0" />
+              <stop offset="0.78" stop-color="#323232" />
+              <stop offset="1" stop-color="#4d4d4d" />
+              <stop offset="1" stop-color="#1e9cd7" />
+              <stop offset="1" stop-color="#32a4da" />
+              <stop offset="1" stop-color="#71bde5" />
+              <stop offset="1" stop-color="#a0cfec" />
+              <stop offset="1" stop-color="#bcdaf1" />
+              <stop offset="1" stop-color="#c7def3" />
+              <stop offset="1" stop-color="#c2dcf2" />
+              <stop offset="1" stop-color="#c3dcf2" />
+              <stop offset="1" stop-color="#cce0f4" />
+            </linearGradient>
+          </defs>
+          <path
+            class="cls-1"
+            d="M184.89,81.84a144.51,144.51,0,0,1-4.46,35.72c0,.1-.06.19-.08.28a143,143,0,0,1-13.43,33.73h0a71.57,71.57,0,0,1-18-7.36,72.34,72.34,0,0,1-13.48-10.08,106.61,106.61,0,0,0,7.33-16.29,107.59,107.59,0,0,0,6.15-36,36,36,0,0,1,29.29-35.37,2.42,2.42,0,0,1,2.78,1.8A143.94,143.94,0,0,1,184.89,81.84Z"
+          />
+          <path
+            class="cls-2"
+            d="M91.11,134.13a72.34,72.34,0,0,1-13.48,10.08,71.57,71.57,0,0,1-18,7.36h0a143,143,0,0,1-13.43-33.73c0-.09-.06-.18-.08-.28a145.31,145.31,0,0,1-.53-69.29,2.42,2.42,0,0,1,2.78-1.8A36,36,0,0,1,77.63,81.84a107.6,107.6,0,0,0,13.48,52.29Z"
+          />
+          <path
+            class="cls-3"
+            d="M167.27,150.92c-.42.76-.85,1.52-1.28,2.27a144.06,144.06,0,0,1-16.73,23.23q-1.47,1.68-3,3.31a3.2,3.2,0,0,1-3.57.74,107.79,107.79,0,0,1-28.52-18,1.37,1.37,0,0,0-1.82,0,107.79,107.79,0,0,1-28.52,18,3.2,3.2,0,0,1-3.57-.74q-1.53-1.64-3-3.31a144.06,144.06,0,0,1-16.73-23.23c-.43-.75-.86-1.51-1.28-2.27a71.5,71.5,0,0,0,18-7.36,72.52,72.52,0,0,0,26.37-26.37c6.12-10.59,9.63-18.11,9.63-31.22,0,13.11,3.51,20.63,9.63,31.22a72.52,72.52,0,0,0,26.37,26.37A71.5,71.5,0,0,0,167.27,150.92Z"
+          />
+        </svg>
+      </router-link>
+      <router-link to="/Cart">
+        <i class="cart fas fa-shopping-cart"></i
+      ></router-link>
     </div>
-    -->
-    <div class="logoBlock">
-      <svg
-        width="150px"
-        height="30px"
-        id="Слой_1"
-        data-name="Слой 1"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 898.1 147.43"
-      >
-        <path
-          class="hidden"
-          d="M452.38,657.76v-133a7,7,0,0,1,6.95-6.95h3.91a7,7,0,0,1,6.95,6.95v50.53a7,7,0,0,0,6.95,6.95h71.59a7,7,0,0,0,6.95-6.95V524.79c0-3.84,2.11-6.95,6-6.95h4.91a7,7,0,0,1,7,6.95v133a7,7,0,0,1-7,7h-3.91a7,7,0,0,1-7-7V607a7,7,0,0,0-6.95-6.95H477.14a7,7,0,0,0-6.95,6.95v50.74a7,7,0,0,1-6.95,7h-3.91A7,7,0,0,1,452.38,657.76Z"
-          transform="translate(-452.38 -517.56)"
-        />
-        <path
-          class="hidden"
-          d="M662.74,517.84h12.91a7,7,0,0,1,6.43,4.31l54.64,133a6.94,6.94,0,0,1-6.42,9.59h-2.38a7,7,0,0,1-6.45-4.36l-14.34-35.81a6.93,6.93,0,0,0-6.45-4.36h-63a6.94,6.94,0,0,0-6.44,4.33l-14.53,35.86a7,7,0,0,1-6.44,4.34h-2.19a6.94,6.94,0,0,1-6.42-9.59l54.64-133A7,7,0,0,1,662.74,517.84Zm-11.29,81.92,35.48.12a5.76,5.76,0,0,0,5.35-8l-17.82-43.36a5.77,5.77,0,0,0-10.67,0l-17.65,43.24A5.76,5.76,0,0,0,651.45,599.76Z"
-          transform="translate(-452.38 -517.56)"
-        />
-        <path
-          class="hidden"
-          d="M794.88,617.28a7,7,0,0,0-7,6.94v33.54c0,3.84-2.11,7-5.95,7h-5.91a7,7,0,0,1-7-7v-133a7,7,0,0,1,7-6.95h53A94.71,94.71,0,0,1,845,519a48.69,48.69,0,0,1,12.13,3.69c8.44,3.94,15.09,8.78,19.94,16.52s6.28,17.32,6.28,26.74c0,11,.66,20.79-6,29.44a60,60,0,0,1-17.68,15.55c-3.58,2.11-1.59,6.83.9,10.17l24.22,32.5c3.41,4.59-2.86,11.1-8.57,11.1h-3a6.93,6.93,0,0,1-5.53-2.74l-31.92-42a7,7,0,0,0-5.51-2.74M834.35,596c6,0,9.89-2.31,15-5.31s6-4.21,9.64-9.64c3.28-4.89,2-9,2-15,0-6.68-.94-11.91-4.45-17.33s-7.57-7-13.79-9.64c-4.49-1.84-7.56-2-15.74-2h-28.8a5.69,5.69,0,0,0-5.69,5.69v47.45a5.68,5.68,0,0,0,5.69,5.69Z"
-          transform="translate(-452.38 -517.56)"
-        />
-        <path
-          class="hidden"
-          d="M928.64,657.76v-133a7,7,0,0,1,7-6.95H983.3a57.36,57.36,0,0,1,29.65,8,60.2,60.2,0,0,1,21.63,21.63,57.43,57.43,0,0,1,8,29.65v28.27a57.4,57.4,0,0,1-8,29.65A60.12,60.12,0,0,1,1013,656.69a57.36,57.36,0,0,1-29.65,8H935.59A7,7,0,0,1,928.64,657.76Z"
-          transform="translate(-452.38 -517.56)"
-        />
-        <rect
-          class="cls-1 hidden"
-          x="637.52"
-          width="95.31"
-          height="37.21"
-          rx="6.95"
-        />
-        <rect
-          class="cls-1 hidden"
-          x="677.3"
-          y="37.21"
-          width="15.85"
-          height="73"
-        />
-        <rect
-          class="cls-1 hidden"
-          x="637.52"
-          y="110.22"
-          width="95.31"
-          height="37.21"
-          rx="6.95"
-        />
-        <path
-          class="cls-2 hidden"
-          d="M651.45,599.76l35.48.12a5.76,5.76,0,0,0,5.35-8l-17.82-43.36a5.77,5.77,0,0,0-10.67,0l-17.65,43.24A5.76,5.76,0,0,0,651.45,599.76Z"
-          transform="translate(-452.38 -517.56)"
-        />
-        <path
-          d="M1238.85,524.79a7,7,0,0,1,6.94-6.95h94.46a7,7,0,0,1,4.91,11.86L1300,574.87a7,7,0,0,0-.74,9l49.93,69.91a6.94,6.94,0,0,1-5.65,11h-97.73a7,7,0,0,1-6.94-7"
-          transform="translate(-452.38 -517.56)"
-        />
-        <path
-          d="M1284.54,590.32l-35.85,35.85a6.92,6.92,0,0,0-2,4.91V650a7,7,0,0,0,6.95,6.94h74.94a6.94,6.94,0,0,0,5.65-11L1295.1,591.2A6.94,6.94,0,0,0,1284.54,590.32Z"
-          transform="translate(-452.38 -517.56)"
-        />
-        <path
-          class="cls-2"
-          d="M1283.89,598l-28.39,28.4a5.5,5.5,0,0,0-1.61,3.89v14.95a5.5,5.5,0,0,0,5.5,5.5h59.35a5.5,5.5,0,0,0,4.48-8.7l-31-43.34A5.5,5.5,0,0,0,1283.89,598Z"
-          transform="translate(-452.38 -517.56)"
-        />
-      </svg>
-    </div>
-    <input class="header__input_search" type="text" />
-    <span class="search_close_btn"></span>
-    <!--<div class="cart"><i class="fad fa-shopping-cart"></i></div>-->
-  </div>
+    <!-- <div class="header__serach_block">
+      <input
+        class="header__search_in"
+        type="text"
+        placeholder="Я хочу купить..."
+      />
+      <button class="header__search_btn"><i class="fas fa-search"></i></button>
+    </div> -->
+  </header>
 </template>
 
 <script>
 export default {
   name: "Head",
-  mounted() {
-    let search_close_btn = document.querySelector(".search_close_btn");
-    let hidd_el_logo = document.querySelectorAll(".hidden");
-    let logoBlock = document.querySelector(".logoBlock");
-    let header__input_search = document.querySelector(".header__input_search");
-    search_close_btn.addEventListener("click", () => {
-      search_close_btn.classList.toggle("active");
-      search_close_btn.addEventListener("transitionend", () => {
-        if (search_close_btn.classList.contains("active")) {
-          header__input_search.focus();
-        }
-      });
-      hidd_el_logo.forEach((el) => {
-        el.classList.toggle("active");
-      });
-      logoBlock.classList.toggle("active");
-      header__input_search.classList.toggle("active");
-    });
-  },
+  // data() {
+  //   return {
+  //     clicked: false,
+  //   };
+  // },
+  mounted() {},
   created() {},
 };
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Monofett&family=Titan+One&display=swap");
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  font-size: 28px;
-  background-color: #fff;
+a {
+  all: unset;
+}
+
+header {
   display: flex;
-  color: #222831;
+  flex-direction: column;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 35;
+}
+.logo_and_nav {
+  background: #fdfdfd;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 10px 5px #05050508;
-  z-index: 5000;
-  padding: 0 20px;
+  padding: 5px 15px;
+}
+.line {
+  display: block;
+  position: relative;
+  width: 28px;
+  height: 5px;
+  border-radius: 2px;
+  background: #323232;
   transition: 0.3s ease-in-out;
 }
-/* .menu-btn {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  margin-left: 25px;
-}
-.menu-btn__line,
-.menu-btn__line::after,
-.menu-btn__line::before {
-  position: absolute;
-  top: 50%;
-  margin-top: -2px;
-  height: 4px;
-  width: 30px;
-  border-radius: 50px;
-  background: #222831;
-  transition: 0.25s ease-in-out;
-}
-.menu-btn__line {
-  background: #ff4000;
-}
-.menu-btn__line.active {
+.menu_btn.active > .line {
   transform: rotate(45deg);
 }
-.menu-btn__line::before {
-  content: "";
-  display: block;
-  transform: translateY(9px);
-}
-.menu-btn__line.active::before {
+.menu_btn.active > .line::after {
+  top: 0px;
   transform: rotate(-90deg);
 }
-.menu-btn__line::after {
+.menu_btn.active > .line::before {
+  background: transparent;
+}
+.line::before {
   content: "";
-  display: block;
-  transform: translateY(-9px);
-}
-.menu-btn__line.active::after {
-  opacity: 0;
-}
-.btn__line {
-  font-size: 26px;
-} */
-
-.fa-search {
-  transition: 0.4s ease-in-out;
-}
-.fa-search.active {
-  transform: translate(-40px) rotate(360deg);
-}
-.fa-search::after,
-.fa-times::before {
-  color: #050505;
-  opacity: 1;
-}
-.fa-search::before,
-.fa-times::after {
-  color: #ff4000;
-  opacity: 0.95;
-}
-
-/* .fa-bars::after {
-  color: #ff4000;
-  opacity: 0.95;
-} */
-.logoBlock {
-  height: 50%;
-}
-.logoBlock.active {
-  width: 20px;
-}
-.logoBlock.active > svg {
-  overflow: hidden;
-  transform: translate(-130px);
-}
-.logoBlock > svg {
-  transition: 0.25s ease-in-out;
-}
-.hidden {
-  filter: opacity(1);
-  transition: 0.3s ease-in-out;
-}
-.hidden.active {
-  filter: opacity(0);
-}
-.header__input_search {
-  width: 10px;
-  border-radius: 10px;
-  border: none;
-  padding: 10px;
-  font-size: 0.5em;
-  margin: 20px 10px;
-  outline: none;
-  opacity: 0;
-  transition: opacity 0.4s ease-in-out;
-  transition: width 0.3s ease-in-out;
-  z-index: 10;
-}
-.header__input_search.active {
-  opacity: 1;
-  width: 100%;
-  box-shadow: 0 0 10px 5px #05050509;
-}
-.search_close_btn {
-  display: block;
-  position: relative;
-  width: 15px;
-  height: 15px;
-  border: 4px solid #050505;
-  border-radius: 50%;
-  transform: translateY(-5px);
-  transition: 0.3s ease-in-out;
-}
-.search_close_btn::before {
-  content: "";
-  display: block;
-  width: 13px;
-  height: 4px;
-  background: #ff4000;
-  transform: translate(13.5px, 18px) rotate(45deg);
-  border-radius: 0 10px 10px 0;
-  transition: 0.3s ease-in-out;
-}
-.search_close_btn::after {
-  content: "";
-  display: block;
-  width: 25px;
-  height: 4px;
-  background: #ff4000;
-  opacity: 0;
-  transform: translate(-20px, 25px) rotate(-45deg);
-  border-radius: 10px;
+  position: absolute;
+  top: -10px;
+  width: 28px;
+  height: 5px;
+  border-radius: 2px;
+  background: #323232;
   transition: 0.2s ease-in-out;
 }
-.search_close_btn.active {
-  width: 25px;
-  height: 25px;
+.line::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  width: 28px;
+  height: 5px;
+  border-radius: 2px;
+  background: #323232;
+  transition: 0.3s ease-in-out;
+}
+.main_logo_svg {
+  height: 60px;
+}
+.menu,
+.cart {
+  color: #323232;
+  font-size: 1.7em;
+}
+
+.header__serach_block {
+  display: flex;
+  background: #fafafa;
+  padding: 15px 15px 10px 15px;
+  z-index: 25;
+  margin-top: 70px;
+}
+.header__search_in {
+  width: 100%;
   border-radius: 10px;
   border: none;
-  padding: 5px;
-  box-shadow: 0 0 10px 5px #05050509;
-  transition: width 0.3s ease-in-out;
-  transform: translateY(0);
+  padding: 0.8em 10px;
+  font-size: 1em;
+  color: #323232dd;
+  outline: none;
+  box-shadow: 0 0 5px 2px #05050505;
 }
-.search_close_btn.active::after {
-  transition: 0.3s ease-in-out;
-  opacity: 1;
-  transform: translate(0.5px, 7px) rotate(-45deg);
-}
-.search_close_btn.active::before {
-  transition: 0.3s ease-in-out;
-  width: 25px;
+.header__search_btn {
+  min-width: 50px;
   border-radius: 10px;
-  transform: translate(0, 11px) rotate(45deg);
+  margin-left: 10px;
+  border: none;
+  font-size: 1.1em;
+  /* color: #f0f0f0f0; */
+  color: #323232;
+  background: #f0f0f0f0;
+  box-shadow: 0 0 5px 1px #05050515;
 }
-/* .cart {
-  margin-right: 25px;
-} */
+
 .cls-1 {
-  fill: #050505;
+  fill: url(#Безымянный_градиент_4);
 }
 .cls-2 {
-  fill: #ff4000;
+  fill: url(#Безымянный_градиент_49);
+}
+.cls-3 {
+  fill: #4d4d4d;
 }
 </style>

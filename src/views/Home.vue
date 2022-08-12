@@ -1,232 +1,83 @@
 <template>
   <div class="homePage">
-    <!-- <Preloader></Preloader> -->
-    <div class="swiperModule">
+    <swiper class="banner_swiper" :pagination="{}" :space-between="50">
+      <swiper-slide v-for="banner in banners" :key="banner">
+        <img class="banner_img" :src="banner" alt="" />
+      </swiper-slide>
+    </swiper>
+    <div class="module orders">
       <swiper
-        id="banners_swiper"
-        :speed="350"
-        :loop="true"
-        :space-between="50"
-        :autoplay="{ delay: 5000 }"
-        :pagination="true"
+        class="order_slider"
+        :free-mode="true"
+        :free-mode-momentum-ratio="0.6"
+        :free-mode-momentum-velocity-ratio="1"
+        :slidesPerView="'auto'"
       >
-        <swiper-slide v-for="banner in banners" :key="banner">
-          <img class="swiperImg" :src="banner" alt="" />
-        </swiper-slide>
-      </swiper>
-    </div>
-    <div v-for="module in modules" :key="module" class="day_items_block">
-      <div class="offer">
-        <h2 class="offers_name">{{ module.name }}</h2>
-        <i :class="module.icon + ' fa-2x'" :style="module.icon_style"></i>
-      </div>
-      <div class="offer__items_block">
-        <swiper
-          id="offer__items_swiper"
-          v-if="module.id_name === 'popular_vendors'"
-          :slides-per-view="2"
-          :space-between="10"
-          :pagination="{}"
-        >
-          <swiper-slide v-for="vendor in vendors" :key="vendor">
-            <div class="vendors">
-              <img class="vendor_img" :src="vendor[0]" alt="" />
-              <img class="vendor_img" :src="vendor[1]" alt="" />
+        <swiper-slide class="order_slide" v-for="order in orders" :key="order">
+          <div class="info_about_order">
+            <img class="order_img" :src="order" />
+            <div class="status_of_order">
+              <h3 class="num_of_order">Заказ №12345678</h3>
+              <p class="status_of_order_txt">
+                Статус заказа: <strong>оформлен</strong>
+              </p>
+              <button class="more_btn">Подробнее...</button>
             </div>
-          </swiper-slide>
-        </swiper>
-        <swiper
-          id="offer__items_swiper"
-          v-else
-          :slides-per-view="2"
-          :space-between="5"
-          :pagination="{}"
-        >
+          </div>
+        </swiper-slide>
+        <template v-if="orders.length <= 1">
           <swiper-slide
-            v-for="item in items.filter(
-              (item) => item.module_locating === module.id_name
-            )"
-            :key="item"
+            class="order_slide"
+            v-for="order in orders"
+            :key="order"
           >
-            <Item :itemData="item"></Item>
+            <div class="info_about_order">
+              <div class="empty_block_of_order">
+                <h3 class="no_orders_phrase">Заказов больше нет</h3>
+                <p class="alternate_offer">
+                  Нажмите, чтобы перейти в Каталог, и сделать новый заказ!
+                </p>
+                <button class="to_new_order">Вперёд, к новым заказам!</button>
+              </div>
+            </div>
           </swiper-slide>
-        </swiper>
-      </div>
-    </div>
-    <div class="news">
-      <div class="offer">
-        <h2 class="offers_name">Новости</h2>
-        <i
-          class="fal fa-newspaper fa-2x"
-          style="color: #050505cc; text-shadow: 0 0 10px #05050550"
-        ></i>
-      </div>
-      <swiper id="offer__items_swiper" :space-between="10" :pagination="{}">
-        <swiper-slide>
-          <div class="offer__new">
-            <img class="new__img" src="/img/news/3080ti.jpg" alt="" />
-            <div class="new__descritipon">
-              <h3 class="new__name">
-                NVIDIA анонсировала RTX 3080Ti и RTX 3070Ti
-              </h3>
-              <p class="new__some_info">
-                NVIDIA анонсировала графическую карту NVIDIA GeForce RTX 3080Ti,
-                которую планируется выпустить уже 3 июня по цене 1199 долларов
-                США.
-              </p>
-            </div>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="offer__new">
-            <img class="new__img" src="/img/news/microsoft.jpg" alt="" />
-            <div class="new__descritipon">
-              <h3 class="new__name">
-                Microsoft начала автоматически обновлять ПК
-              </h3>
-              <p class="new__some_info">
-                Компания Microsoft ускоряет распространение самой свежей версии
-                Windows 10 и уже начала автоматически обновлять ПК
-                пользователей. Microsoft начала автоматически обновлять ПК до
-                самой свежей версии Windows 10 Майское обновление Windows 10 May
-                2021 Update, также известное под кодовым названием 21H1, стало
-                первым крупным апдейтом Windows 10 в 2021 году, а его релиз
-                состоялся 18 мая.
-              </p>
-            </div>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="offer__new">
-            <img
-              class="new__img"
-              src="/img/news/microsoft_new_gen.jpg"
-              alt=""
-            />
-            <div class="new__descritipon">
-              <h3 class="new__name">
-                Новое поколение Windows представят уже 24 июня
-              </h3>
-              <p class="new__some_info">
-                Microsoft анонсировала специальное мероприятие с презентацией
-                «нового поколения Windows» — презентация начнётся 24 июня в
-                18:00 МСК.
-              </p>
-            </div>
-          </div>
-        </swiper-slide>
+        </template>
       </swiper>
-      <footer>
-        <div class="footer__subscribe_block">
-          <p class="subscribe_block__subscribe_text">
-            Подпишитесь, и мы будем держать вас в курсе важной информации.
-          </p>
-          <input
-            class="subscribe_block__subscribe_input"
-            placeholder="Ваш e-mail"
-            type="email"
-          />
-          <button class="subscribe_block__subscribe_btn">Подписаться</button>
-        </div>
-        <div class="footer__info_block">
-          <div class="info_block__footer_logo">
-            <svg
-              class="footer_logo__svg"
-              id="Слой_1"
-              data-name="Слой 1"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 898.1 147.43"
-            >
-              <title>HardikRounded</title>
-              <path
-                d="M452.38,657.76v-133a7,7,0,0,1,6.95-6.95h3.91a7,7,0,0,1,6.95,6.95v50.53a7,7,0,0,0,6.95,6.95h71.59a7,7,0,0,0,6.95-6.95V524.79c0-3.84,2.11-6.95,6-6.95h4.91a7,7,0,0,1,7,6.95v133a7,7,0,0,1-7,7h-3.91a7,7,0,0,1-7-7V607a7,7,0,0,0-6.95-6.95H477.14a7,7,0,0,0-6.95,6.95v50.74a7,7,0,0,1-6.95,7h-3.91A7,7,0,0,1,452.38,657.76Z"
-                transform="translate(-452.38 -517.56)"
-              />
-              <path
-                d="M662.74,517.84h12.91a7,7,0,0,1,6.43,4.31l54.64,133a6.94,6.94,0,0,1-6.42,9.59h-2.38a7,7,0,0,1-6.45-4.36l-14.34-35.81a6.93,6.93,0,0,0-6.45-4.36h-63a6.94,6.94,0,0,0-6.44,4.33l-14.53,35.86a7,7,0,0,1-6.44,4.34h-2.19a6.94,6.94,0,0,1-6.42-9.59l54.64-133A7,7,0,0,1,662.74,517.84Zm-11.29,81.92,35.48.12a5.76,5.76,0,0,0,5.35-8l-17.82-43.36a5.77,5.77,0,0,0-10.67,0l-17.65,43.24A5.76,5.76,0,0,0,651.45,599.76Z"
-                transform="translate(-452.38 -517.56)"
-              />
-              <path
-                d="M794.88,617.28a7,7,0,0,0-7,6.94v33.54c0,3.84-2.11,7-5.95,7h-5.91a7,7,0,0,1-7-7v-133a7,7,0,0,1,7-6.95h53A94.71,94.71,0,0,1,845,519a48.69,48.69,0,0,1,12.13,3.69c8.44,3.94,15.09,8.78,19.94,16.52s6.28,17.32,6.28,26.74c0,11,.66,20.79-6,29.44a60,60,0,0,1-17.68,15.55c-3.58,2.11-1.59,6.83.9,10.17l24.22,32.5c3.41,4.59-2.86,11.1-8.57,11.1h-3a6.93,6.93,0,0,1-5.53-2.74l-31.92-42a7,7,0,0,0-5.51-2.74M834.35,596c6,0,9.89-2.31,15-5.31s6-4.21,9.64-9.64c3.28-4.89,2-9,2-15,0-6.68-.94-11.91-4.45-17.33s-7.57-7-13.79-9.64c-4.49-1.84-7.56-2-15.74-2h-28.8a5.69,5.69,0,0,0-5.69,5.69v47.45a5.68,5.68,0,0,0,5.69,5.69Z"
-                transform="translate(-452.38 -517.56)"
-              />
-              <path
-                d="M928.64,657.76v-133a7,7,0,0,1,7-6.95H983.3a57.36,57.36,0,0,1,29.65,8,60.2,60.2,0,0,1,21.63,21.63,57.43,57.43,0,0,1,8,29.65v28.27a57.4,57.4,0,0,1-8,29.65A60.12,60.12,0,0,1,1013,656.69a57.36,57.36,0,0,1-29.65,8H935.59A7,7,0,0,1,928.64,657.76Z"
-                transform="translate(-452.38 -517.56)"
-              />
-              <rect
-                class="cls-1"
-                x="637.52"
-                width="95.31"
-                height="37.21"
-                rx="6.95"
-              />
-              <rect
-                class="cls-1"
-                x="677.3"
-                y="37.21"
-                width="15.85"
-                height="73"
-              />
-              <rect
-                class="cls-1"
-                x="637.52"
-                y="110.22"
-                width="95.31"
-                height="37.21"
-                rx="6.95"
-              />
-              <path
-                class="cls-2"
-                d="M651.45,599.76l35.48.12a5.76,5.76,0,0,0,5.35-8l-17.82-43.36a5.77,5.77,0,0,0-10.67,0l-17.65,43.24A5.76,5.76,0,0,0,651.45,599.76Z"
-                transform="translate(-452.38 -517.56)"
-              />
-              <path
-                d="M1238.85,524.79a7,7,0,0,1,6.94-6.95h94.46a7,7,0,0,1,4.91,11.86L1300,574.87a7,7,0,0,0-.74,9l49.93,69.91a6.94,6.94,0,0,1-5.65,11h-97.73a7,7,0,0,1-6.94-7"
-                transform="translate(-452.38 -517.56)"
-              />
-              <path
-                class="cls-2"
-                d="M1283.89,598l-28.39,28.4a5.5,5.5,0,0,0-1.61,3.89v14.95a5.5,5.5,0,0,0,5.5,5.5h59.35a5.5,5.5,0,0,0,4.48-8.7l-31-43.34A5.5,5.5,0,0,0,1283.89,598Z"
-                transform="translate(-452.38 -517.56)"
-              />
-            </svg>
-          </div>
-
-          <div class="footer__links">
-            <h3 class="useful_links_txt">Полезные ссылки</h3>
-            <ul class="useful_links">
-              <li><i class="fad fa-newspaper"></i>Новости</li>
-              <li><i class="fad fa-phone"></i>Контакты</li>
-              <li><i class="fad fa-map-signs"></i>Магазины на карте</li>
-              <li><i class="fad fa-tools"></i>Сервисные центры</li>
-              <li><i class="fad fa-address-card"></i>О нас</li>
-              <li><i class="fad fa-podium"></i>Форум</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="copyright">
-          <i class="far fa-copyright"></i>
-          2021 Hardik<br />
-          Made, designed and built by
-          <a href="https://vk.com/0xffa500" class="author_link">Nikita Ionov</a>
-          <br />
-          The site contains
-          <a href="https://swiperjs.com/" class="swiper_link">Swiper</a>,
-          <a href="https://fontawesome.com/" class="font_link">Font Awesome</a>
-          <br />
-          All photos and text are an example and taken from the Internet
-        </div>
-      </footer>
     </div>
+    <loader url="/api/modules/get_modules">
+      <template v-slot="{ data }">
+        <div class="module" v-for="(_module, index) in data" :key="_module._id">
+          <h2 class="name_of_module">{{ _module.name }}</h2>
+          <swiper
+            :key="index"
+            :free-mode="true"
+            :free-mode-momentum-ratio="0.6"
+            :free-mode-momentum-velocity-ratio="1"
+            :slidesPerView="'auto'"
+            :space-between="15"
+            :centerInsufficientSlides="true"
+            :slidesOffsetAfter="20"
+          >
+            <swiper-slide
+              class="item_slide"
+              v-for="item in items.filter(
+                (item) => item.module_locating === _module.id_name
+              )"
+              :key="item._id"
+            >
+              <item :itemData="item"></item>
+            </swiper-slide>
+          </swiper>
+        </div>
+      </template>
+    </loader>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Item from "@/components/Item";
-// import Preloader from "@/components/Preloader";
+import Loader from "@/components/Loader";
 
 import SwiperCore, { Pagination, A11y, Autoplay } from "swiper";
 
@@ -241,15 +92,20 @@ export default {
   data() {
     return {
       banners: [
-        "./img/banners/Slide(2Var).jpg",
-        "./img/banners/SlideNum2.jpg",
-        "./img/banners/SlideNum3.jpg",
+        "./img/banners/Banner.png",
+        "./img/banners/Banner2.jpg",
+        "./img/banners/Banner3.png",
       ],
       vendors: [
         ["/img/vendors/asus.png", "/img/vendors/lenovo.jpg"],
         ["/img/vendors/apple.png", "/img/vendors/xiaomi.png"],
         ["/img/vendors/samsung.jpg", "/img/vendors/lg.png"],
         ["/img/vendors/kingston.png", "/img/vendors/hp.png"],
+      ],
+      orders: [
+        ["/img/items/asus-rog-strix-g15-g512lv-hn230-cernyj-100763991-1.png"],
+        // ["/img/items/iphone_12_pro.png"],
+        // ["/img/items/TV_Samsung.png"],
       ],
       items: [],
       modules: [],
@@ -258,209 +114,119 @@ export default {
   created() {
     axios.get("/api/items/get_main_page_items").then((res) => {
       this.items = res.data;
-      console.log(this.items);
     });
-    axios.get("/api/modules/get_modules").then((res) => {
-      this.modules = res.data;
-    });
+    // axios.get("/api/modules/get_modules").then((res) => {
+    //   this.modules = res.data;
+    // });
   },
   components: {
     Swiper,
     SwiperSlide,
     Item,
-    // Preloader,
+    Loader,
   },
 };
 </script>
 <style>
-.homePage {
-  margin-top: 61px;
-  margin-bottom: 54px;
-}
-.swiperModule {
-  padding-top: 10px;
-}
-#banners_swiper {
-  border-radius: 10px;
-  box-shadow: 0 0 10px 5px #05050507;
-}
-#offer__items_swiper {
-  padding: 10px 0 35px 0;
-}
-.swiperImg {
-  width: 100%;
-  border-radius: 10px;
-}
-.swiper-pagination-bullet-active {
-  background: #ff4000;
-}
-.offers_name {
+.banner_swiper {
   padding: 10px;
-  margin: 10px 0;
 }
-.fa-fire {
-  color: #ff4000;
-  text-shadow: 0 0 10px #ff4000aa;
-}
-/* .fa-fire::after {
-  opacity: 0.9;
-  color: #ff4000;
-} */
-.offer {
-  display: flex;
-  justify-content: space-between;
-  padding-right: 15px;
-  align-items: center;
-  box-shadow: 0 0 10px 5px #05050508;
+.banner_img {
+  width: calc(100vw - 20px);
   border-radius: 10px;
 }
-.vendor_img {
-  width: 80%;
-  height: 70px;
-  object-fit: contain;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 5px #05050508;
-  padding: 15px 20px;
+.banner_swiper > .swiper-pagination {
+  bottom: 20px;
 }
-.offer__new {
-  height: 280px;
+.swiper-pagination-bullet {
+  background: #050505;
+  margin: 5px;
+}
+.module {
+  min-height: 153px;
+  margin: 15px 10px;
+  background: #fdfdfd;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0 0 10px 5px #05050508;
+  transition: 0.3s ease-in-out;
 }
-.new__name {
-  font-size: 1.2em;
-  margin: 5px;
-  widows: 100%;
+.name_of_module {
+  padding: 5px;
+  margin: 0;
 }
-.new__some_info {
-  font-size: 1em;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  word-break: break-all;
-  margin: 5px;
-  color: #05050580;
-}
-.new__img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-footer {
-  background: #d5d5d5;
-  border-radius: 10px 10px 0 0;
-  margin-top: 10px;
-  padding: 0 0 20px 0;
-}
-.footer__subscribe_block {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  background: #f5f5f5;
-  padding: 20px 0;
-  border-radius: 10px 10px 0 0;
-}
-.subscribe_block__subscribe_text {
-  margin: 20px 0;
-  text-align: center;
-  font-size: 1.2em;
-  font-weight: 500;
-  margin-bottom: 0;
-  padding: 0 10px;
-}
-.subscribe_block__subscribe_input {
-  border-radius: 10px;
-  border: none;
-  padding: 13px;
-  font-size: 1em;
-  margin: 20px 10px;
-  box-shadow: 0 0 10px 5px #05050507;
-  outline: none;
-}
-.subscribe_block__subscribe_btn {
-  border-radius: 10px;
-  border: none;
-  padding: 13px;
-  background: #ff4000cc;
-  color: #fff;
-  font-size: 1.1em;
-  margin: 20px 10px;
+.orders {
   margin-top: 0;
-  box-shadow: 0 0 10px 5px #ff400020;
+  padding: 0 0 10px 0;
 }
-.footer__info_block {
+.order_slide {
+  width: 100%;
+}
+.order_img {
+  position: relative;
+  width: 130px;
+  height: 100px;
+  padding: 5px;
+  object-fit: contain;
+}
+.info_about_order {
   display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-  padding: 10px;
-}
-.info_block__footer_logo {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-.footer_logo__svg {
-  align-self: flex-start;
-  width: 50%;
-  margin: 10px;
-}
-.footer_logo__svg {
-  fill: #050505bb;
-}
-.footer_logo__svg .cls-2 {
-  fill: #d5d5d5;
-}
-.footer__links {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: #050505bb;
-}
-.useful_links_txt {
-  font-size: 1.4em;
-  margin: 10px 5px 25px 5px;
-}
-.useful_links {
-  display: flex;
-  flex-direction: column;
-  margin: 0 5px;
-  padding: 0;
-}
-.useful_links > li {
-  padding: 15px;
-  list-style: none;
-  font-size: 1.2em;
-}
-.useful_links > li:first-child {
-  border-top: 1px solid #05050510;
-}
-.useful_links > li:nth-child(even) {
-  border-top: 1px solid #05050510;
-  border-bottom: 1px solid #05050510;
-}
-.useful_links > li:last-child {
-  margin-bottom: 5px;
-}
-.useful_links > li > i {
-  min-width: 30px;
-  margin-right: 5px;
-  font-size: 1.1em;
-}
-.copyright {
-  background: #d5d5d5;
-  color: #a5a5a5;
-  text-align: center;
-  margin-top: 10px;
-  padding: 0 10px;
-  line-height: 1.4em;
+  justify-content: space-around;
+  padding: 20px 0 10px 0;
 }
 
-.author_link,
-.swiper_link,
-.font_link {
-  color: #858585;
+.empty_block_of_order {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+}
+.empty_block_of_order > * {
+  margin: 5px;
+}
+.no_orders_phrase {
+  font-weight: bold;
+}
+.alternate_offer {
+  font-size: 0.85em;
+  max-width: 230px;
+  color: #050505dd;
+}
+.to_new_order {
+  background: #ffc83d;
+  font-size: 0.9em;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0 0 0;
+}
+
+.num_of_order {
+  margin: 0 0;
+}
+.status_of_order {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+}
+.status_of_order_txt {
+  line-height: 1.4em;
+  margin: 10px 0 10px 0;
+}
+.more_btn {
+  align-self: flex-end;
+  border: none;
+  font-weight: bold;
+  background: #f0f0f0;
+  color: #050505f0;
+  border-radius: 5px;
+  padding: 10px;
+}
+.item_slide {
+  width: 140px;
 }
 </style>

@@ -19,6 +19,7 @@ import anime from "animejs";
 
 export default {
   name: "Preloader",
+  watch: {},
   mounted() {
     let preloader = document.querySelector(".preloader");
     window.addEventListener("load", () => {

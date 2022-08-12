@@ -1,29 +1,37 @@
 <template>
   <div class="shop_item">
-    <img class="item__image" :src="'/api/' + itemData.image" alt="" />
-    <span class="item__category">{{ itemData.category }}</span>
-    <p class="item__name">
-      {{ itemData.name }}
-    </p>
-    <div class="item__buy_block">
-      <div class="item__price_block">
-        <div v-if="itemData.old_price" class="item__old_price_block">
-          <span class="item__old_price"
-            >{{
+    <router-link :to="{ name: 'Item_page', params: { itemID: itemData._id } }">
+      <img
+        class="item_image"
+        :src="'/api/images/' + itemData.image[0]"
+        alt=""
+      />
+      <p class="item_category">{{ itemData.category }}</p>
+      <p class="item_name">{{ itemData.vendor + " " + itemData.name }}</p>
+      <div class="item_price_block">
+        <div class="old_price_block" v-if="itemData.old_price">
+          <p class="item_old_price">
+            {{
               itemData.old_price.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ")
-            }}₽</span
-          >
-          <span class="difference">
+            }}₽
+          </p>
+          <p class="item_difference">
             -{{ rounding(itemData.old_price, itemData.price) }}%
-          </span>
+          </p>
         </div>
-        <span class="item__price"
-          >{{
-            itemData.price.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ")
-          }}₽</span
-        >
+        <p class="item_price">
+          {{ itemData.price.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ") }}₽
+        </p>
       </div>
-      <button class="item__buyBtn"><i class="fal fa-shopping-cart"></i></button>
+    </router-link>
+    <div class="item_action_block">
+      <button class="item_comparison_btn">
+        <i class="fad fa-balance-scale-right"></i>
+      </button>
+      <button class="item_buy_btn" @click="add_item_in_cart">
+        <i class="fad fa-shopping-cart"></i>
+        <!-- <span v-if="$route.name === 'Home'" class="buy_txt">Купить</span> -->
+      </button>
     </div>
   </div>
 </template>
@@ -36,7 +44,12 @@ export default {
   },
   methods: {
     rounding(old_price, price) {
-      return (100 - 100 / (Number(old_price) / Number(price))).toFixed(0);
+      return Math.abs(100 - 100 / (Number(old_price) / Number(price))).toFixed(
+        0
+      );
+    },
+    add_item_in_cart() {
+      this.$store.commit("add_item_id", this.itemData._id);
     },
   },
 };
@@ -44,84 +57,81 @@ export default {
 
 <style scoped>
 .shop_item {
-  display: flex;
-  height: 245px;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-size: 14px;
-  box-shadow: 0 0 10px 5px #05050505;
-  border-radius: 10px;
-  padding: 20px 0 10px 0;
+  width: 140px;
+  padding: 10px 15px;
 }
-.shop_item > .item__image {
-  max-width: 80%;
-  height: 110px;
+.shop_item > a {
+  all: unset;
+  color: inherit;
+}
+.item_image {
+  width: calc(100% - 10px);
+  padding: 0 5px;
+  height: 100px;
   object-fit: contain;
 }
-.item__category {
-  font-weight: 300;
-  font-size: 12px;
-  align-self: flex-start;
-  padding: 10px 15px 3px 15px;
-  color: #05050550;
+.item_category {
+  font-size: 0.8em;
+  color: #05050560;
+  margin: 5px 0 5px 0;
 }
-.item__name {
+.item_name {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-break: break-all;
-  height: 34px;
-  padding: 0 15px;
-  line-height: 18px;
-  margin: 0;
+  margin: 5px 0;
 }
-.item__buy_block {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px 10px 15px;
-}
-.item__buyBtn {
-  font-size: 16px;
-  align-self: flex-end;
-  padding: 10px 15px;
-  margin: 0 15px 0 0;
-  border-radius: 10px;
-  color: #ff4000;
-  /* background: radial-gradient(#050505, #050505dd); */
-  background-color: #050505;
-  border: none;
-  box-shadow: 0 0 5px 2px #05050520;
-}
-.difference {
-  font-size: 12px;
-  background: #fbaf00;
-  border-radius: 10px;
-  padding: 2px 2px 2px 1px;
-  margin-left: 2px;
-}
-.item__price_block {
-  align-self: flex-start;
-  height: 100%;
+.item_price_block {
+  margin: 10px 0;
+  min-height: 37px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 0 0 0 15px;
 }
-.item__old_price {
-  color: #05050550;
-  align-self: flex-start;
+.old_price_block {
+  display: flex;
+  font-size: 0.8em;
+}
+.item_old_price {
+  color: #05050580;
   text-decoration: line-through;
-  font-size: 12px;
-  font-weight: 300;
+  margin: 0;
 }
-.item__price {
-  font-weight: 700;
-  align-self: flex-start;
-  font-size: 17px;
+.item_difference {
+  font-size: 0.8em;
+  margin: 0;
+  background: #ffce1b;
+  border-radius: 10px;
+  padding: 2px;
+  margin-left: 3px;
+}
+.item_price {
+  font-size: 1.1em;
+  margin: 0;
+}
+.item_action_block {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5px;
+  margin: 5px 0;
+}
+.item_comparison_btn {
+  width: 40%;
+  border-radius: 10px;
+  font-size: 1.1em;
+  padding: 10px 5px;
+  border: none;
+  background: #aee070;
+}
+.item_buy_btn {
+  width: 40%;
+  padding: 10px 5px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  border: none;
+  color: #f0f0f0;
+  background: #050505;
 }
 </style>

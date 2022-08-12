@@ -1,5 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Catalog from "../views/Catalog.vue";
+import Profile from "../views/Profile.vue";
+import Cart from "../views/Cart.vue";
+import Item_page from "../views/Item_page.vue";
+import Authorization from "../views/Authorization.vue";
+import Registration from "../components/Registration.vue";
+import Login from "../components/Login.vue";
 
 const routes = [
   {
@@ -16,6 +23,48 @@ const routes = [
     component: function () {
       return import(/* webpackChunkName: "about" */ "../views/About.vue");
     },
+  },
+  {
+    path: "/catalog",
+    name: "Catalog",
+    component: Catalog,
+    meta: { transition: "slide-left" },
+  },
+  {
+    path: "/auth",
+    name: "Authorization",
+    component: Authorization,
+    meta: { transition: "slide-left" },
+    children: [
+      {
+        path: "login",
+        component: Login,
+        meta: { transition: "slide-left" },
+      },
+      {
+        path: "registration",
+        component: Registration,
+        meta: { transition: "slide-left" },
+      },
+    ],
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+    meta: { transition: "slide-left" },
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: Cart,
+    meta: { transition: "slide-left" },
+  },
+  {
+    path: "/item/:itemID",
+    name: "Item_page",
+    component: Item_page,
+    meta: { transition: "slide-left" },
   },
 ];
 
